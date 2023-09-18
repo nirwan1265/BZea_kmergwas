@@ -55,18 +55,22 @@ phenotype_filtered_geno <- inner_join(phenotype_filtered, geno)
 # Plant height
 PH <- phenotype_filtered_geno[,c("Seq_Full_ID","PH")]
 colnames(PH) <- c("accession_id","phenotype_value")
+PH <- PH[complete.cases(PH), ]
 
 # Ear height
 EH <- phenotype_filtered_geno[,c("Seq_Full_ID","EH")]
 colnames(EH) <- c("accession_id","phenotype_value")
+EH <- EH[complete.cases(EH), ]
 
 # Ear Number
 EN <- phenotype_filtered_geno[,c("Seq_Full_ID","EN")]
 colnames(EN) <- c("accession_id","phenotype_value")
+EN <- EN[complete.cases(EN), ]
 
-write.table(PH,"PH.txt", quote = F, row.names = F, sep = "\t")
-write.table(EH,"EH.txt", quote = F, row.names = F, sep = "\t")
-write.table(EN,"EN.txt", quote = F, row.names = F, sep = "\t")
+
+write.table(PH,"data/PH.txt", quote = F, row.names = F, sep = "\t")
+write.table(EH,"data/EH.txt", quote = F, row.names = F, sep = "\t")
+write.table(EN,"data/EN.txt", quote = F, row.names = F, sep = "\t")
 
 
 
