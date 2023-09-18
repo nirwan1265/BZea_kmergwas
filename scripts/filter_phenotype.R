@@ -44,4 +44,29 @@ phenotype_filtered <- inner_join(averaged_phenotype,sample)
 phenotype_filtered <- phenotype_filtered %>%
   dplyr::filter(Female_genotype != "Purple Check")
 
+# Get the genotyoes that was used for kmergwas
+geno <- read.table("data/extracted_column.txt")
+colnames(geno) <- "Seq_Full_ID"
+
+# Getting just the filtered genotypes
+phenotype_filtered_geno <- inner_join(phenotype_filtered, geno)
+
+
+# Plant height
+PH <- phenotype_filtered_geno[,c("Seq_Full_ID","PH")]
+colnames(PH) <- c("accession_id","phenotype_value")
+
+# Ear height
+EH <- phenotype_filtered_geno[,c("Seq_Full_ID","EH")]
+colnames(EH) <- c("accession_id","phenotype_value")
+
+# Ear Number
+EN <- phenotype_filtered_geno[,c("Seq_Full_ID","EN")]
+colnames(EN) <- c("accession_id","phenotype_value")
+
+write.table(PH,"PH.txt", quote = F, row.names = F, sep = "\t")
+write.table(EH,"EH.txt", quote = F, row.names = F, sep = "\t")
+write.table(EN,"EN.txt", quote = F, row.names = F, sep = "\t")
+
+
 
